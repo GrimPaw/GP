@@ -23,7 +23,7 @@ class ActiveR
 	 *
 	 * @return assoc array
 	 */
-	public function selectAll() {
+	public function findAll() {
 		$sql = "SELECT * FROM $this->table";
 		$stmt = $this->db->query($sql);
 
@@ -35,34 +35,47 @@ class ActiveR
 	 *
 	 * @return obj
 	 */
-	public function select()
+	public function findOne($params)
 	{
-
-		$values = '';
-		$i = 0;
-		foreach ($this->props as $prop) {
-			if($i == 0) {
-				$values .= $prop;
-			} else {
-				$values .= ",".$prop;
-			}
-			$i++;
-		}
-
-		if($this->id) {
-
-			$sql = "SELECT $values FROM $this->table WHERE id = :id";
+		if(!is_array($params)) {
+			$sql = "SELECT * FROM $this->table WHERE id = :id";
 			$stmt = $this->db->prepare($sql);
-			$stmt->bindParam(":id", $this->id);
+			$stmt->bindParam(":id", $params);
 			$stmt->execute();
 
-			return $stmt;
+			return $stmt->fetchAll();
 		} else {
-			$sql = "SELECT $values FROM $this->table";
-			$stmt = $this->db->query($sql);
+			/*
+			 * @TODO переделать эту каку...
+			 */
+			$ph_key = '';
+			$ph_value = '';
+			foreach ($params as $key => $param) {
+				$ph_key[] = $key;
+				$ph_value[] = $param;
+			}
 
-			return $stmt;
+			$sql = "SELECT * FROM $this->table WHERE $ph_key[0] = ? AND $ph_key[1] = ?";
+			$stmt = $this->db->prepare($sql);
+
+			$stmt->execute(array($ph_value[0], $ph_value[1]));
+
+			return $stmt->fetchAll();
 		}
+	}
+
+	public function find()
+	{
+		//		$values = '';
+//		$i = 0;
+//		foreach ($this->props as $prop) {
+//			if($i == 0) {
+//				$values .= $prop;
+//			} else {
+//				$values .= ",".$prop;
+//			}
+//			$i++;
+//		}
 	}
 
 	/*
@@ -71,11 +84,11 @@ class ActiveR
 	public function save()
 	{
 
-		$sql = "UPDATE $this->table SET bar = :bar WHERE id = :id";
-		$statement = $this->db->prepare($sql);
-		$statement->bindParam("bar", $this->bar);
-		$statement->bindParam("id", $this->id);
-		$statement->execute();
+//		$sql = "UPDATE $this->table SET bar = :bar WHERE id = :id";
+//		$statement = $this->db->prepare($sql);
+//		$statement->bindParam("bar", $this->bar);
+//		$statement->bindParam("id", $this->id);
+//		$statement->execute();
 
 	}
 }
@@ -85,11 +98,12 @@ $dbs = new ActiveR(new PDO("mysql:host=".$DBHost.";dbname=".$DBName, $DBLogin, $
 $dbs->table = "gp_users";
 $dbs->props = ['id', 'login'];
 
-
+$arr["id"] = 0;
+$arr["mass"] = "hie";
 
 echo "<pre>";
 
-$users = $dbs->selectAll();
-$usersNames = $dbs->select()->fetch();
-print_r($usersNames);
+$users = $dbs->findOne(['id' => 1, 'login' => 'admin']);
+//$usersNames = $dbs->select()->fetch();
+print_r($users);
 print_r($dbs);
