@@ -21,7 +21,7 @@ class ActiveR
 	/*
 	 * Выбираем все записи по таблице
 	 *
-	 * @return assoc array
+	 * @return array
 	 */
 	public function findAll() {
 		$sql = "SELECT * FROM $this->table";
@@ -33,7 +33,7 @@ class ActiveR
 	/*
 	 * Выборочно выбираем записи
 	 *
-	 * @return obj
+	 * @return array
 	 */
 	public function findOne($params)
 	{
@@ -64,18 +64,34 @@ class ActiveR
 		}
 	}
 
-	public function find()
+
+	/*
+	 * Функция дял сортировки поиска
+	 *
+	 *
+	 */
+	public function where(array $params)
 	{
-		//		$values = '';
-//		$i = 0;
-//		foreach ($this->props as $prop) {
-//			if($i == 0) {
-//				$values .= $prop;
-//			} else {
-//				$values .= ",".$prop;
-//			}
-//			$i++;
-//		}
+
+		$count = count($params);
+		$ph_key = '';
+		$ph_value = '';
+
+		if($count <= 1) {
+			foreach ($params as $key => $param) {
+				$ph_key = $key;
+				$ph_value = $param;
+			}
+		} else {
+			throw new \Exception('Может быть использовано только 1 свойство.');
+		}
+
+
+		$sql = "SELECT * FROM $this->table WHERE $ph_key = ?";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array($ph_value));
+
+		return $stmt->fetchAll();
 	}
 
 	/*
@@ -93,17 +109,43 @@ class ActiveR
 	}
 }
 
+
 $dbs = new ActiveR(new PDO("mysql:host=".$DBHost.";dbname=".$DBName, $DBLogin, $DBPass, $DBopt));
 
 $dbs->table = "gp_users";
-$dbs->props = ['id', 'login'];
-
-$arr["id"] = 0;
-$arr["mass"] = "hie";
 
 echo "<pre>";
-
-$users = $dbs->findOne(['id' => 1, 'login' => 'admin']);
-//$usersNames = $dbs->select()->fetch();
+$users = $dbs->where(['id' => 1]);
 print_r($users);
-print_r($dbs);
+
+
+//class Model {
+//
+//	public static function find() {
+//		return new Test(get_called_class());
+//	}
+//}
+//
+//class Test extends ActiveR {
+//
+//	protected $db;
+//	public function __construct()
+//	{
+//		parent::__construct();
+//	}
+//
+//	public function all() {
+//		return parent::findAll();
+//	}
+//}
+//
+//$test = new Test(new PDO("mysql:host=".$DBHost.";dbname=".$DBName, $DBLogin, $DBPass, $DBopt));
+//
+//$model = new Model($test);
+//
+//$model::find()->all();
+
+
+
+
+
