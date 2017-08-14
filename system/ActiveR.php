@@ -110,40 +110,20 @@ class ActiveR
 }
 
 
-$dbs = new ActiveR(new PDO("mysql:host=".$DBHost.";dbname=".$DBName, $DBLogin, $DBPass, $DBopt));
 
+
+$db = new DB();
+
+$dbs = new ActiveR($db);
 $dbs->table = "gp_users";
+
 
 echo "<pre>";
 $users = $dbs->where(['id' => 1]);
 print_r($users);
 
 
-//class Model {
-//
-//	public static function find() {
-//		return new Test(get_called_class());
-//	}
-//}
-//
-//class Test extends ActiveR {
-//
-//	protected $db;
-//	public function __construct()
-//	{
-//		parent::__construct();
-//	}
-//
-//	public function all() {
-//		return parent::findAll();
-//	}
-//}
-//
-//$test = new Test(new PDO("mysql:host=".$DBHost.";dbname=".$DBName, $DBLogin, $DBPass, $DBopt));
-//
-//$model = new Model($test);
-//
-//$model::find()->all();
+
 
 
 
