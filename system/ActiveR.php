@@ -111,10 +111,7 @@ class ActiveR
 
 
 
-
-$db = new DB();
-
-$dbs = new ActiveR($db);
+$dbs = new ActiveR();
 $dbs->table = "gp_users";
 
 
