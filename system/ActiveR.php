@@ -2,8 +2,6 @@
 namespace Engine;
 use PDO;
 
-require_once "config.php";
-
 class ActiveR
 {
 	protected $db;
@@ -12,11 +10,26 @@ class ActiveR
 	public $table;
 	public $props = [];
 
-	public function __construct(PDO $db)
+	public function __construct()
 	{
-		$this->db = $db;
+		$config = $this->init("config.php");
+
+		$this->db = new PDO('mysql:dbname='.$config["dbname"].';host='.$config["dbhost"].'', $config["dbuser"], $config["dbpass"], $config["dbopt"]);
 	}
 
+
+	/*
+	 * @param $val - filename to include
+	 *
+	 * @return file config
+	 */
+	public function init($val)
+	{
+		if(is_file($val)) {
+			return require $val;
+		}
+		return false;
+	}
 
 	/*
 	 * Выбираем все записи по таблице
