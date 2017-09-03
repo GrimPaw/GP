@@ -4,9 +4,9 @@ namespace Engine;
 
 class ActiveR {
 
-	public $const = array();
+	protected $const = [];
 
-	public function find()
+	public static function find()
 	{
 		return new ActiveQ();
 	}
@@ -23,7 +23,29 @@ class ActiveR {
 
 class ActiveQ {
 
-	public $fields = [];
+	protected $fields = [];
+
+
+	public function __get($name)
+	{
+		if(array_key_exists($name, $this->fields)) {
+			return $this->toArray();
+		}
+
+		return false;
+	}
+//
+//	public function __set($name, $value)
+//	{
+//		$this->fields[$name] = $value;
+//	}
+
+
+	public function toArray()
+	{
+		return $this->fields;
+	}
+
 
 	public function where($param)
 	{
@@ -47,7 +69,11 @@ class ActiveQ {
 
 $test = new ActiveR();
 
-$a = $test->find()->where(["id" => 1])->set(1);
+$a = ActiveR::find()->where(["id" => 1])->set(1);
 
 echo "<pre>";
 print_r($a);
+
+foreach ($a as $ass) {
+	print_r($ass);
+}
