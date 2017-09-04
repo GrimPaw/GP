@@ -58,9 +58,7 @@ class AcQ extends AcR
 
 	public function stringer($from)
 	{
-		return new self([
-			"where" => $from->where
-		]);
+
 	}
 }
 
