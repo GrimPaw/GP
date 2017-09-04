@@ -18,11 +18,23 @@ class AcR
 		return new AcQ();
 	}
 
+	public function asd($val)
+	{
+		$this->const[] = [
+			"val" => $val
+		];
+	}
+
 }
 
-class AcQ
+class AcQ extends AcR
 {
 	public $fields = [];
+
+
+	public function __construct()
+	{
+	}
 
 
 	public function addParams($params)
@@ -31,7 +43,7 @@ class AcQ
 		return $this;
 	}
 
-	public function where($param)
+	public function where($param = null)
 	{
 		$this->addParams($param);
 		return $this;
@@ -42,10 +54,20 @@ class AcQ
 		$this->addParams($param);
 		return $this;
 	}
+
+
+	public function stringer($from)
+	{
+		return new self([
+			"where" => $from->where
+		]);
+	}
 }
 
 
 $a = AcR::find()->where(["id" => 1])->set(1);
+//$b = AcR::find()->stringer($a);
 
 echo "<pre>";
 print_r($a);
+//print_r($b);
