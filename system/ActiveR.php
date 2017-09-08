@@ -32,7 +32,7 @@ class ActiveR
 	}
 
 
-	public function find()
+	public static function find()
 	{
 		return new Query();
 	}
@@ -122,20 +122,3 @@ class ActiveR
 
 	}
 }
-
-
-
-$dbs = new ActiveR();
-$dbs->table = "gp_users";
-
-
-echo "<pre>";
-
-
-
-
-
-
-
-
-

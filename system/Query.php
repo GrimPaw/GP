@@ -1,5 +1,4 @@
 <?php
-
 namespace Engine;
 use Engine\QueryInterface;
 
@@ -8,7 +7,7 @@ class Query implements QueryInterface
 	/*
 	 * set array where
 	 */
-	private $where = [];
+	protected $where = [];
 
 	/*
 	 * set string order by
@@ -38,5 +37,12 @@ class Query implements QueryInterface
 	{
 		$this->orderBy = $param;
 		return $this;
+	}
+
+	public function __toString()
+	{
+		return sprintf("where: %s",
+			implode(", ", $this->where)
+		);
 	}
 }

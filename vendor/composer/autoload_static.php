@@ -20,11 +20,23 @@ class ComposerStaticInit2811a5cae4f1ea0d48da3ca12523846e
         ),
     );
 
+    public static $classMap = array (
+        'Engine\\AcQ' => __DIR__ . '/../..' . '/system/Test3.php',
+        'Engine\\AcR' => __DIR__ . '/../..' . '/system/Test3.php',
+        'Engine\\ActiveR' => __DIR__ . '/../..' . '/system/ActiveR.php',
+        'Engine\\Field' => __DIR__ . '/../..' . '/system/Test.php',
+        'Engine\\Identity' => __DIR__ . '/../..' . '/system/Test.php',
+        'Engine\\Query' => __DIR__ . '/../..' . '/system/Query.php',
+        'Engine\\QueryBuilder' => __DIR__ . '/../..' . '/system/QueryBuilder.php',
+        'Engine\\QueryInterface' => __DIR__ . '/../..' . '/system/QueryInterface.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2811a5cae4f1ea0d48da3ca12523846e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2811a5cae4f1ea0d48da3ca12523846e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit2811a5cae4f1ea0d48da3ca12523846e::$classMap;
 
         }, null, ClassLoader::class);
     }
