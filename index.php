@@ -5,8 +5,8 @@ $a = new \Engine\Query();
 $a->where('id');
 
 $b = new \Engine\QueryBuilder();
-$b->buildWhere();
+$c = $b->buildWhere();
 
 echo "<pre>";
 print_r($a);
-print_r($b);
+print_r($c);

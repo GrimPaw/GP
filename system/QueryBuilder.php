@@ -12,6 +12,6 @@ class QueryBuilder extends Query
 	public function buildWhere()
 	{
 		$query = (new Query())->where("id");
-		echo $query;
+		return $query;
 	}
 }
