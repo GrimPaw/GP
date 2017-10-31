@@ -4,6 +4,9 @@ use Engine\QueryInterface;
 
 class Query implements QueryInterface
 {
+
+	public $fields = [];
+
 	/*
 	 * set array where
 	 */
@@ -12,7 +15,7 @@ class Query implements QueryInterface
 	/*
 	 * set string order by
 	 */
-	private $orderBy = "";
+	protected $orderBy = "";
 
 
 	/*
@@ -24,6 +27,7 @@ class Query implements QueryInterface
 	public function where($param)
 	{
 		$this->where[] = $param;
+		$this->addParams($param);
 		return $this;
 	}
 
@@ -36,13 +40,27 @@ class Query implements QueryInterface
 	public function orderBy($param)
 	{
 		$this->orderBy = $param;
+		$this->addParams($param);
 		return $this;
 	}
 
-	public function __toString()
+
+	public function addParams($param)
+	{
+		$this->fields[] = new QueryBuilder($param);
+	}
+
+	public function stringer()
 	{
 		return sprintf("where: %s",
-			implode(", ", $this->where)
+			implode(", ", $this->fields)
 		);
 	}
+
+//	public function __toString()
+//	{
+//		return sprintf("where: %s",
+//			implode(", ", $this->where)
+//		);
+//	}
 }

@@ -2,16 +2,19 @@
 namespace Engine;
 use Engine\Query;
 
-class QueryBuilder extends Query
+class QueryBuilder
 {
+	public $field = [];
+	public $query;
 
-	public static function className() {
-		return get_called_class();
-	}
-
-	public function buildWhere()
+	public function __construct($query)
 	{
-		$query = (new Query())->where("id");
-		return $query;
+		return $this->buildWhere($query);
 	}
+
+	public function buildWhere($query)
+	{
+		$this->field[] = $query;
+	}
+
 }
