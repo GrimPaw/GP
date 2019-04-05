@@ -4,5 +4,9 @@
       "Engine\\": "system/"
     },
     "classmap": ["system/"]
+  },
+  "require": {
+    "ext-mysqli": "*",
+    "ext-pdo": "*"
   }
 }

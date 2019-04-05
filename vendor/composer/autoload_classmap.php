@@ -6,12 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Engine\\AcQ' => $baseDir . '/system/Test3.php',
-    'Engine\\AcR' => $baseDir . '/system/Test3.php',
     'Engine\\ActiveR' => $baseDir . '/system/ActiveR.php',
-    'Engine\\Field' => $baseDir . '/system/Test.php',
-    'Engine\\Identity' => $baseDir . '/system/Test.php',
     'Engine\\Query' => $baseDir . '/system/Query.php',
-    'Engine\\QueryBuilder' => $baseDir . '/system/QueryBuilder.php',
     'Engine\\QueryInterface' => $baseDir . '/system/QueryInterface.php',
 );
