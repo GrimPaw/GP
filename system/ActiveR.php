@@ -23,13 +23,14 @@ class ActiveR
 	 *
 	 * @return file config
 	 */
-	public function init($val)
-	{
-		if(is_file($val)) {
-			return require $val;
-		}
-		return false;
-	}
+    public function init($val)
+    {
+        $path = realpath(DIR_ROOT."/system/".$val);
+        if(file_exists($path) && is_file($path)) {
+            return require $path;
+        }
+        return false;
+    }
 
 
 	public static function find()
