@@ -1,28 +1,26 @@
 <?php
 namespace Engine;
 use PDO;
-
 class ActiveR
 {
-	protected $db;
-
-	public $id;
-	public $table;
-	public $props = [];
-
-	public function __construct()
-	{
-		$config = $this->init("config.php");
-
-		$this->db = new PDO('mysql:dbname='.$config["dbname"].';host='.$config["dbhost"].'', $config["dbuser"], $config["dbpass"], $config["dbopt"]);
-	}
+    protected $db;
+    public $id;
+    public $table;
+    public $props = [];
 
 
-	/*
-	 * @param $val - filename to include
-	 *
-	 * @return file config
-	 */
+    public function __construct()
+    {
+        $config = $this->init("config.php");
+        $this->db = new PDO('mysql:dbname='.$config["dbname"].';host='.$config["dbhost"].'', $config["dbuser"], $config["dbpass"], $config["dbopt"]);
+    }
+
+
+    /*
+     * @param $val - filename to include
+     *
+     * @return file config
+     */
     public function init($val)
     {
         $path = realpath(DIR_ROOT."/system/".$val);
@@ -33,28 +31,27 @@ class ActiveR
     }
 
 
-	public static function find()
-	{
-		return new Query();
-	}
-
-	/*
-	 * Выбираем все записи по таблице
-	 *
-	 * @return array
-	 */
+    public static function find()
+    {
+        $class = '\Engine\Query';
+        return new $class();
+    }
+    /*
+     * Выбираем все записи по таблице
+     *
+     * @return array
+     */
 //	public function findAll() {
 //		$sql = "SELECT * FROM $this->table";
 //		$stmt = $this->db->query($sql);
 //
 //		return $stmt->fetchAll();
 //	}
-
-	/*
-	 * Выборочно выбираем записи
-	 *
-	 * @return array
-	 */
+    /*
+     * Выборочно выбираем записи
+     *
+     * @return array
+     */
 //	public function findOne($params)
 //	{
 //		if(!is_array($params)) {
@@ -83,8 +80,6 @@ class ActiveR
 //			return $stmt->fetchAll();
 //		}
 //	}
-
-
 //	public function where(array $params)
 //	{
 //
@@ -108,18 +103,15 @@ class ActiveR
 //
 //		return $stmt->fetchAll();
 //	}
-
-	/*
-	 * Общий метод, для сохранения значений
-	 */
-	public function save()
-	{
-
+    /*
+     * Общий метод, для сохранения значений
+     */
+    public function save()
+    {
 //		$sql = "UPDATE $this->table SET bar = :bar WHERE id = :id";
 //		$statement = $this->db->prepare($sql);
 //		$statement->bindParam("bar", $this->bar);
 //		$statement->bindParam("id", $this->id);
 //		$statement->execute();
-
-	}
+    }
 }

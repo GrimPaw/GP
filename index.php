@@ -11,4 +11,4 @@ $AR = new \Engine\ActiveR();
 
 echo "<pre>";
 print_r($a);
-print_r($AR);
+print_r($AR::find());

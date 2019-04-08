@@ -15,6 +15,7 @@ class Query implements QueryInterface
     private $from = [];
     private $where = [];
 
+
     public function find()
     {
         // TODO: Implement find() method.
