@@ -15,11 +15,13 @@ class Query implements QueryInterface
     private $from = [];
     private $where = [];
 
+    private $sql;
 
-    public function find()
+    public function __construct()
     {
-        // TODO: Implement find() method.
+
     }
+
 
     public function select(array $fields)
     {
