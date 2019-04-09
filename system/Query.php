@@ -15,13 +15,6 @@ class Query implements QueryInterface
     private $from = [];
     private $where = [];
 
-    private $sql;
-
-    public function __construct()
-    {
-
-    }
-
 
     public function select(array $fields)
     {

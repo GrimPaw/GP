@@ -4,7 +4,6 @@ use PDO;
 class ActiveR
 {
     protected $db;
-    protected static $sql;
 
     public $id;
     public $table;
@@ -15,7 +14,6 @@ class ActiveR
     {
         $config = $this->init("config.php");
         $this->db = new PDO('mysql:dbname='.$config["dbname"].';host='.$config["dbhost"].'', $config["dbuser"], $config["dbpass"], $config["dbopt"]);
-        self::$sql = new Query();
     }
 
 
@@ -36,7 +34,7 @@ class ActiveR
 
     public static function find()
     {
-        return self::$sql;
+        return new Query();
     }
     /*
      * Выбираем все записи по таблице
