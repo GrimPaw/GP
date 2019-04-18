@@ -5,5 +5,7 @@ interface QueryInterface
 {
     public function select(array $fields);
     public function from($table, $alias);
-    public function where($condition);
+    public function where($field, $value, $operator);
+
+    public function getSql();
 }

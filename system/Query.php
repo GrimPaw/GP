@@ -9,7 +9,7 @@
 namespace Engine;
 
 
-class Query implements QueryInterface
+/*class Query implements QueryInterface
 {
     private $fields = [];
     private $from = [];
@@ -45,4 +45,4 @@ class Query implements QueryInterface
         );
     }
 
-}
+}*/

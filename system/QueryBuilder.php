@@ -9,21 +9,43 @@
 namespace Engine;
 
 
-class QueryBuilder extends ActiveR
+class QueryBuilder implements QueryInterface
 {
 
-    public static $sql;
+    protected $query;
 
-    public function __construct()
+    protected function reset()
     {
-        parent::__construct();
-
+        $this->query = new \stdClass();
     }
 
-    public function test()
+    public function select(array $fields)
     {
-        return self::$sql;
+        $this->reset();
+        $this->query->base = "SELECT ". implode(", ", $fields);
+        $this->query->type = "select";
+
+        return $this;
     }
 
+    public function from($table, $alias)
+    {
+        $this->query->from[] = $table. " AS ". $alias;
+        return $this;
+    }
+
+    public function where($field, $value, $operator = "=")
+    {
+        if(!in_array($this->query->type, ['select', 'update'])) {
+            throw new \Exception("WHERE can only be added to SELECT or UPDATE");
+        }
+        $this->query->where[] = "$field $operator '$value'";
+        return $this;
+    }
+
+    public function getSql()
+    {
+        // TODO: Implement getSql() method.
+    }
 
 }

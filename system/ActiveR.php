@@ -34,7 +34,7 @@ class ActiveR
 
     public static function find()
     {
-        return new Query();
+        return new QueryBuilder();
     }
     /*
      * Выбираем все записи по таблице
