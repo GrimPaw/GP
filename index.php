@@ -9,9 +9,10 @@ $AR = new \Engine\ActiveR();
 
 $query = $AR::find();
 $user = $query->select(['id', 'name'])->from('user', 'u')->where('id',3);
+//echo  $user;
 
 
-function clientCode(\Engine\QueryBuilder $queryBuilder)
+/*function clientCode(\Engine\QueryBuilder $queryBuilder)
 {
 
     $query = $queryBuilder
@@ -24,7 +25,6 @@ function clientCode(\Engine\QueryBuilder $queryBuilder)
 
 }
 
-clientCode(new \Engine\QueryBuilder());
+clientCode(new \Engine\QueryBuilder());*/
 echo "<pre>";
 print_r($user);
-//echo $qu;

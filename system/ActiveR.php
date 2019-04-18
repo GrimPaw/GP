@@ -4,6 +4,7 @@ use PDO;
 class ActiveR
 {
     protected $db;
+    protected $query;
 
     public $id;
     public $table;
@@ -36,6 +37,7 @@ class ActiveR
     {
         return new QueryBuilder();
     }
+
     /*
      * Выбираем все записи по таблице
      *
