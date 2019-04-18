@@ -11,7 +11,20 @@ $query = $AR::find();
 $user = $query->select(['id', 'name'])->from('user', 'u')->where('id',3);
 
 
+function clientCode(\Engine\QueryBuilder $queryBuilder)
+{
 
+    $query = $queryBuilder
+        ->select(['id', 'name'])
+        ->from('user', 'u')
+        ->where('id',3)
+        ->getSQL();
+
+    echo $query;
+
+}
+
+clientCode(new \Engine\QueryBuilder());
 echo "<pre>";
 print_r($user);
 //echo $qu;

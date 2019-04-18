@@ -45,7 +45,15 @@ class QueryBuilder implements QueryInterface
 
     public function getSql()
     {
-        // TODO: Implement getSql() method.
+        $query = $this->query;
+        $sql = $query->base;
+
+        if(!empty($query->where)) {
+            $sql .= " WHERE ".implode(' AND ', $query->where);
+        }
+
+        $sql .= ";";
+        return $sql;
     }
 
 }
