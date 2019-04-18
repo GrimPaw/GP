@@ -33,6 +33,10 @@ class ActiveR
     }
 
 
+    /**
+     * @return QueryBuilder
+     * //TODO это метод должен создавать объекты по типу return GP::createObject(className) и тогда мы сможем вносить изменения в объект на лету
+     */
     public static function find()
     {
         return new QueryBuilder();
