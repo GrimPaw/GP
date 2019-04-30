@@ -4,14 +4,15 @@ define('DIR_ROOT', dirname(__FILE__));
 $obj = new \Engine\Query();
 $AR = new \Engine\ActiveR();
 
-
 $a = $obj->select(['id', 'name'])->from('user', 'u')->where('id = 3');
 
 
-$AR = new \Engine\ActiveR();
+
 //echo  $a;
-$ds = $AR->init("config.php");
-print_r($ds["dbname"]);
+$query = $AR::find();
+$user = $query->select(['id', 'name'])->from('user', 'u')->where('u.id=1');
+//$user = $AR::find()->select(['id', 'name'])->from('user', 'u')->where('u.id=1');
+
 echo "<pre>";
-print_r($a);
 print_r($AR);
+print_r($user);

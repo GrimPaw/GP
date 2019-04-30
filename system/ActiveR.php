@@ -6,6 +6,7 @@ class ActiveR
 {
 	protected $db;
 
+	public $sql;
 	public $id;
 	public $table;
 	public $props = [];
@@ -35,7 +36,10 @@ class ActiveR
 
 	public static function find()
 	{
-		return new Query();
+	    /*self::$sql = new Query();
+	    $sql = self::$sql;
+	    echo $sql;*/
+	    return new Query();
 	}
 
 	/*
